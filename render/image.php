@@ -13,8 +13,8 @@ if ( "postmeta" == ACFTCP_Core::$db_table ) { // ACF
 // If image is returned as an array (postmeta / v5) or an object (posts / v4)
 if ( $return_format == 'array' || $return_format == 'object'  ) {
 	echo $this->indent . htmlspecialchars("<?php \$".$this->var_name." = " . $this->get_field_method . "( '" . $this->name ."'". $this->location . " ); ?>")."\n";
-	echo $this->indent . htmlspecialchars("<?php \$".$this->name."URL = ".$this->name."['url']; ?>")."\n";
-	echo $this->indent . htmlspecialchars("<?php \$".$this->name."ALT = ".$this->name."['alt']; ?>")."\n";
+	echo $this->indent . htmlspecialchars("<?php \$".$this->name."URL = \$".$this->name."['url']; ?>")."\n";
+	echo $this->indent . htmlspecialchars("<?php \$".$this->name."ALT = \$".$this->name."['alt']; ?>")."\n";
 	echo $this->indent . htmlspecialchars("<?php if ( \$".$this->var_name." ) { ?>")."\n";
 	echo $this->indent . htmlspecialchars("	<img src=\"<?php echo \$".$this->name."URL; ?>\" alt=\"<?php echo \$".$this->name."ALT; ?>\" />")."\n";
 	echo $this->indent . htmlspecialchars("<?php } ?>\n");
