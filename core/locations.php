@@ -238,7 +238,44 @@ class ACFTCP_Locations {
 		$blockName = preg_replace("/[^A-Za-z0-9]/", "", get_the_title());
 
 
-		echo '<div id=acfbc-group-block">';
+		//Theme code Generator
+		echo '<div id=acfbc-theme-group-block">';
+		echo '<div class="acftc-field-meta"><span class="acftc-field-meta__title" data-type="text" data-pseudo-content="Theme Block Code for '.get_the_title().'"></span></div>';
+		echo '</div>';
+		echo '<div class="acftc-field-code"><pre class="language-php"><code>';
+
+		echo "add_action( 'acf/init', 'acfgbc_".$blockName."' );\n";
+
+		echo "function acfgbc_".$blockName."() {\n";
+		echo "	if ( ! function_exists( 'acf_register_block' ) ) {\n";
+		echo "		return;\n";
+		echo "	}\n";
+		echo "	acf_register_block( array(\n";
+		echo "		'name'            => 'acfgbc".$blockName."',\n";
+		echo "		'title'           => __( '".get_the_title()."' ),\n";
+		echo "		'description'     => __( '".get_the_title()."' ),\n";
+		echo "		'render_callback' => 'acfgbc_".$blockName."_rc',\n";
+		echo "		'category'        => 'sayhelloblocks',\n";
+		echo "		'icon'            => 'tagcloud',\n";
+		echo "		'mode'            => 'preview',\n";
+		echo "		'supports'        => array( 'align' => false, 'multiple' => true, ),\n";
+		echo "		'keywords'        => array( 'Row', 'Common' ),\n";
+		echo "	) );\n";
+		echo "}\n";
+
+		echo "function acfgbc_".$blockName."_rc( \$block, \$content = '', \$is_preview = false ) {\n";
+		echo "	if (\$is_preview) {\n";
+		echo "		include_once get_template_directory().'/parts/blocks/editor/styles.php';\n";
+		echo "	}\n";
+		echo "	include get_template_directory(). '/parts/blocks/".$blockName.".php';\n";
+		echo "}\n";
+
+		echo '</code></pre></div>';
+
+
+
+		//Plugin Code Generator
+		echo '<div id=acfbc-plugin-group-block">';
 		echo '<div class="acftc-field-meta"><span class="acftc-field-meta__title" data-type="text" data-pseudo-content="Plug-in Block Code for '.get_the_title().'"></span></div>';
 		echo '</div>';
 		echo '<div class="acftc-field-code"><pre class="language-php"><code>';
@@ -246,7 +283,7 @@ class ACFTCP_Locations {
 		echo "/**\n";
 		echo "* Plugin Name: ".get_the_title()."\n";
 		echo "* Plugin URI: https://www.technicks.com\n";
-		echo "* Description: Automatically generated plugin to bridge ACF Gutenberg code and JointsWP: Block Name:".get_the_title()."\n";
+		echo "* Description: Automatically generated plugin to bridge ACF Gutenberg code and TechnicksWP: Block Name:".get_the_title()."\n";
 		echo "* Author: Edward Nickerson\n";
 		echo "* Author URI: https://www.technicks.com\n";
 		echo "* Version: 1.0.0\n";
@@ -267,7 +304,7 @@ class ACFTCP_Locations {
 		echo "		return;\n";
 		echo "	}\n";
 		echo "	acf_register_block( array(\n";
-		echo "		'name'            => 'acfgbc/".$blockName."',\n";
+		echo "		'name'            => 'acfgbc".$blockName."',\n";
 		echo "		'title'           => __( '".get_the_title()."' ),\n";
 		echo "		'description'     => __( '".get_the_title()."' ),\n";
 		echo "		'render_callback' => 'acfgbc_".$blockName."_rc',\n";
